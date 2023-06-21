@@ -27,6 +27,11 @@
       <td>{{$elem->slug}}</td>
       <td>
         <a href="{{route('admin.projects.show', $elem)}}">Show</a>
+        <form action="{{route('admin.projects.destroy', $elem)}}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button onclick="return confirm('sei sicuro di voler eliminare il progetto?')" type="submit" class="btn btn-danger">DELETE</button>
+        </form>
       </td>
     </tr>
     @endforeach

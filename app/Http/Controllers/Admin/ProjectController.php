@@ -39,7 +39,32 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validazione
+        /*$request->validate(
+            [
+                'project_title' => 'required|unique:project|max:200',
+            ],
+            [
+                'project_title.required' => 'Il campo titolo è obbligatorio',
+                'project_title.unique' => 'Il campo titolo è già esistente',
+                'project_title.max' => 'Il campo titolo ha superato il limite di caratteri'
+            ]
+        );*/
+
+        $form_data = $request->all();
+
+        // trasformazione slug
+        $slug = Project::generateSlug($request->project_title);
+
+        $form_data['slug'] = $slug;
+        //fill
+        $new_project = Project::create($form_data);
+        // $new_project = new Project();
+
+        // $new_project->fill($form_data);
+        // $new_project->save();
+
+        return redirect()->route('admin.projects.index');
     }
 
     /**
@@ -82,8 +107,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('admin.projects.index');
+
     }
 }

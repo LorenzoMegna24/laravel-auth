@@ -23,10 +23,10 @@
                 <textarea class="form-control" name="description" cols="30" rows="10"></textarea>
             </div>
     
-            <div class="form-group my-2">
+            {{-- <div class="form-group my-2">
                 <label class="form-label" for="">SLUG</label>
                 <input class="form-control" type="text" name="slug">
-            </div>
+            </div> --}}
     
             <button type="submit" class="btn btn-success my-3">CREA PROGETTO</button>
         </form>   
