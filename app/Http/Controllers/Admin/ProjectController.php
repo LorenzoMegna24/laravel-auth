@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Admin\Project;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -37,7 +39,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
         // validazione
         /*$request->validate(
@@ -51,7 +53,8 @@ class ProjectController extends Controller
             ]
         );*/
 
-        $form_data = $request->all();
+        //$form_data = $request->all();
+        $form_data = $request->validated();
 
         // trasformazione slug
         $slug = Project::generateSlug($request->project_title);
@@ -96,7 +99,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
                 /*$request->validate(
             [
@@ -108,7 +111,8 @@ class ProjectController extends Controller
             ]
         );*/
 
-        $form_data = $request->all();
+        //$form_data = $request->all();
+        $form_data = $request->validated();
 
         // trasformazione slug
         $slug = Project::generateSlug($request->project_title);

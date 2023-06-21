@@ -8,6 +8,21 @@
     <div class="container">
 
         <h1>Modifica il progetto: {{$project->project_title}}</h1>
+
+        {{-- validation error list --}}
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+
+                    @foreach ($errors->all() as $elem)
+                        <li>
+                            {{$elem}}
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         
         <form action="{{route('admin.projects.update', $project)}}" method="POST">
     
