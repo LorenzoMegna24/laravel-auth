@@ -24,7 +24,7 @@
             </div>
         @endif
         
-        <form action="{{route('admin.projects.update', $project)}}" method="POST">
+        <form action="{{route('admin.projects.update', $project)}}" method="POST" enctype="multipart/form-data">
     
             @csrf
             
@@ -40,6 +40,12 @@
                 <textarea class="form-control" name="description" cols="30" rows="10">{{old('description') ?? $project->description}}</textarea>
             </div>
     
+            {{-- campo input file --}}
+            <div class="form-group my-2">
+                <label class="form-label" for="">CARICA IMMAGINE</label>
+                <input class="form-control" type="file" name="img" aria-describedby="fileHelpId">
+            </div>
+
             {{-- <div class="form-group my-2">
                 <label class="form-label" for="">SLUG</label>
                 <input class="form-control" type="text" name="slug">

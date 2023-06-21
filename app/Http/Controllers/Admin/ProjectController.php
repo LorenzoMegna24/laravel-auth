@@ -9,6 +9,8 @@ use App\Models\Admin\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 
+use Illuminate\Support\facades\Storage;
+
 class ProjectController extends Controller
 {
     /**
@@ -60,6 +62,15 @@ class ProjectController extends Controller
         $slug = Project::generateSlug($request->project_title);
 
         $form_data['slug'] = $slug;
+
+        // caricamento immagine
+        if ($request->hasFile('img')) {
+
+            $path = Storage::disk('public')->put('project_images', $request->img);
+
+            $form_data['img'] = $path;
+        }
+
         //fill
         $new_project = Project::create($form_data);
         // $new_project = new Project();
@@ -132,6 +143,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->img) {
+            Storage::delete($project->img);
+        }
+        
         $project->delete();
 
         return redirect()->route('admin.projects.index');
