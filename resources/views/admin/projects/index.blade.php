@@ -6,6 +6,8 @@
 
 @section('content')
 <h1>Tutti i progetti</h1>
+
+<a class="btn btn-primary my-3" href="{{route('admin.projects.create')}}">Inserisci nuovo progetto</a>
     
 
 <table class="table">
